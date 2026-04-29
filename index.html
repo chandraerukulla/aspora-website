@@ -50,10 +50,23 @@
     }
     .nav-left { display: flex; align-items: center; gap: 40px; }
     .nav-logo {
-      font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900;
-      color: var(--g800); letter-spacing: -0.5px; cursor: pointer; white-space: nowrap;
+      display: flex; align-items: center; gap: 9px;
+      cursor: pointer; white-space: nowrap; color: var(--g900);
+      text-decoration: none;
     }
-    .nav-logo em { font-style: normal; color: var(--crimson); }
+    .logo-mark { height: 26px; width: auto; flex-shrink: 0; }
+    .logo-text {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 21px; font-weight: 900; letter-spacing: -0.8px;
+      color: var(--g900); line-height: 1;
+    }
+    .footer-logo-wrap { display: flex; align-items: center; gap: 8px; }
+    .footer-logo-mark { height: 22px; width: auto; opacity: 0.85; }
+    .footer-logo-text {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 18px; font-weight: 900; letter-spacing: -0.6px;
+      color: var(--white); line-height: 1;
+    }
     .nav-links { display: flex; align-items: center; gap: 4px; }
     .nav-link {
       font-size: 14px; font-weight: 500; color: var(--g600);
@@ -658,6 +671,23 @@
     }
     .lfaq-tab.on { background: var(--g800); border-color: var(--g800); color: var(--white); }
 
+    /* ─── MARKETS BROWSER ─── */
+    .market-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 32px; }
+    .mcard {
+      background: var(--white); border: 1.5px solid var(--g200); border-radius: 14px;
+      padding: 18px 20px; cursor: pointer; transition: all 0.18s;
+    }
+    .mcard:hover { border-color: var(--gold); box-shadow: 0 6px 20px rgba(200,134,10,0.10); transform: translateY(-2px); }
+    .mcard-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+    .mcard-ticker { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--g900); }
+    .mcard-exchange { font-size: 10px; font-weight: 800; letter-spacing: 0.8px; padding: 3px 8px; border-radius: 6px; background: rgba(200,134,10,0.10); color: var(--gold); }
+    .mcard-name { font-size: 12px; color: var(--g500); margin-bottom: 14px; line-height: 1.4; }
+    .mcard-price { font-size: 17px; font-weight: 700; color: var(--g900); }
+    .mcard-change { font-size: 12px; font-weight: 700; margin-top: 3px; }
+    .mcard-change.up { color: #16A34A; }
+    .mcard-change.dn { color: #DC2626; }
+    .mf-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+
     /* ─── ASSET DETAIL ─── */
     .asset-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 24px; margin-top: 24px; }
     .asset-ticker-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
@@ -804,7 +834,13 @@
 <nav id="main-nav">
   <div class="nav-inner">
     <div class="nav-left">
-      <div class="nav-logo" onclick="nav('home')">Asp<em>o</em>ra</div>
+      <div class="nav-logo" onclick="nav('home')">
+        <svg class="logo-mark" viewBox="0 0 52 34" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 34 L0 0 L28 0 L18 34 Z"/>
+          <path d="M32 0 L52 0 L52 34 L40 34 Z"/>
+        </svg>
+        <span class="logo-text">aspora</span>
+      </div>
       <div class="nav-links">
         <span class="nav-link" onclick="nav('remittance')">Remittances</span>
         <span class="nav-link" onclick="nav('banking')">Banking</span>
@@ -1160,7 +1196,7 @@
   <footer>
     <div class="footer-grid">
       <div>
-        <div class="footer-logo">Asp<em>o</em>ra</div>
+        <div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div>
         <p class="footer-tagline">Built for lives in motion. Remittance, banking, and investments for everyone who belongs to more than one place.</p>
       </div>
       <div>
@@ -1226,7 +1262,7 @@
 
   <footer>
     <div class="footer-mini">
-      <div class="footer-logo">Asp<em>o</em>ra</div>
+      <div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div>
       <div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd.</div>
     </div>
   </footer>
@@ -1243,8 +1279,8 @@
       <h1 class="phero-h1">Move your money.<br><span style="color:var(--crimson)">Globally.</span></h1>
       <p class="phero-sub">Fast, transparent transfers with live tracking. The money you send has someone's name on it. It should arrive like it.</p>
       <div class="cta-row">
-        <button class="btn-lg btn-lg-primary">Start sending →</button>
-        <button class="btn-lg btn-lg-ghost">See live rates</button>
+        <button class="btn-lg btn-lg-primary" onclick="nav('products')">Start sending →</button>
+        <button class="btn-lg btn-lg-ghost" onclick="nav('transaction')">See live rates</button>
       </div>
     </div>
   </section>
@@ -1322,7 +1358,7 @@
       <h2 class="cta-band-h">Too much is riding on this<br>for it not to arrive.</h2>
       <p class="cta-band-sub">Send your first transfer in under 3 minutes. Your family will know before you finish your coffee.</p>
       <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
-        <button class="btn-lg btn-lg-primary">Start sending →</button>
+        <button class="btn-lg btn-lg-primary" onclick="nav('products')">Start sending →</button>
         <span style="color:var(--crimson);cursor:pointer;font-size:14px;font-weight:700;" onclick="nav('transaction')">View sample transaction →</span>
       </div>
     </div>
@@ -1330,7 +1366,7 @@
 
   <footer>
     <div class="footer-mini">
-      <div class="footer-logo">Asp<em>o</em>ra</div>
+      <div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div>
       <div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd. FCA Regulated.</div>
     </div>
   </footer>
@@ -1347,8 +1383,8 @@
       <h1 class="phero-h1">Access your money.<br><span style="color:var(--teal)">Globally.</span></h1>
       <p class="phero-sub">A bank account built for lives in motion. Spend, save, and manage across borders like it was always supposed to work.</p>
       <div class="cta-row">
-        <button class="btn-lg btn-lg-teal">Open your account →</button>
-        <button class="btn-lg btn-lg-ghost">See features</button>
+        <button class="btn-lg btn-lg-teal" onclick="nav('products')">Open your account →</button>
+        <button class="btn-lg btn-lg-ghost" onclick="nav('bank-account')">See features</button>
       </div>
     </div>
   </section>
@@ -1418,7 +1454,7 @@
       <h2 class="cta-band-h">Your money should be as<br>mobile as you are.</h2>
       <p class="cta-band-sub">Open your multi-currency account in 3 minutes. No branch, no paperwork, no system that wasn't built for you.</p>
       <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
-        <button class="btn-lg btn-lg-teal">Open your account →</button>
+        <button class="btn-lg btn-lg-teal" onclick="nav('products')">Open your account →</button>
         <span style="color:var(--teal);cursor:pointer;font-size:14px;font-weight:700;" onclick="nav('bank-account')">View sample account →</span>
       </div>
     </div>
@@ -1426,7 +1462,7 @@
 
   <footer>
     <div class="footer-mini">
-      <div class="footer-logo">Asp<em>o</em>ra</div>
+      <div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div>
       <div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd. FCA Regulated.</div>
     </div>
   </footer>
@@ -1443,8 +1479,8 @@
       <h1 class="phero-h1">Invest your money.<br><span style="color:var(--gold)">Globally.</span></h1>
       <p class="phero-sub">The money you send lands. Then it keeps building. Indian markets, US equities, and global funds from wherever you are.</p>
       <div class="cta-row">
-        <button class="btn-lg btn-lg-blue">Start investing →</button>
-        <button class="btn-lg btn-lg-ghost">Explore assets</button>
+        <button class="btn-lg btn-lg-blue" onclick="nav('products')">Start investing →</button>
+        <button class="btn-lg btn-lg-ghost" onclick="nav('markets')">Explore markets</button>
       </div>
     </div>
   </section>
@@ -1453,7 +1489,7 @@
     <div class="inner">
       <span class="sec-tag">Features</span>
       <h2 class="sec-h2">Your money keeps working after it lands</h2>
-      <div style="display:flex;gap:12px;margin-bottom:36px;flex-wrap:wrap;"><button class="btn-lg btn-lg-ghost" style="font-size:13px;padding:10px 18px;" onclick="nav('asset')">Browse stocks →</button><button class="btn-lg btn-lg-ghost" style="font-size:13px;padding:10px 18px;" onclick="nav('option-chain')">Option chain →</button></div>
+      <div style="display:flex;gap:12px;margin-bottom:36px;flex-wrap:wrap;"><button class="btn-lg btn-lg-ghost" style="font-size:13px;padding:10px 18px;" onclick="nav('markets')">Browse markets →</button><button class="btn-lg btn-lg-ghost" style="font-size:13px;padding:10px 18px;" onclick="nav('option-chain')">Option chain →</button></div>
       <div class="feat-grid">
         <div class="fcard">
           <div class="fcard-icon fi-blue">🇮🇳</div>
@@ -1514,17 +1550,53 @@
     <div class="inner">
       <h2 class="cta-band-h">The momentum doesn't stop<br>when the money lands.</h2>
       <p class="cta-band-sub">Start building wealth across borders. Your investment account is ready in a few minutes.</p>
-      <button class="btn-lg btn-lg-blue">Start investing →</button>
+      <button class="btn-lg btn-lg-blue" onclick="nav('products')">Start investing →</button>
     </div>
   </div>
 
   <footer>
     <div class="footer-mini">
-      <div class="footer-logo">Asp<em>o</em>ra</div>
+      <div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div>
       <div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd. Capital at risk.</div>
     </div>
   </footer>
 </div><!-- /page-investments -->
+
+
+<!-- ════════════════════════════════════════
+     PAGE: MARKETS BROWSER
+════════════════════════════════════════ -->
+<div id="page-markets" class="page">
+  <section class="phero phero-inv" style="padding-bottom:60px;">
+    <div class="phero-inner">
+      <div class="breadcrumb"><span onclick="nav('home')">Home</span><span class="breadcrumb-sep">/</span><span onclick="nav('investments')">Investments</span><span class="breadcrumb-sep">/</span><span>Markets</span></div>
+      <h1 class="phero-h1">Browse <span style="color:var(--gold)">Markets</span></h1>
+      <p class="phero-sub">Indian equities, US stocks, and global ETFs — all in one place. Click any asset for a full snapshot.</p>
+    </div>
+  </section>
+
+  <section class="section sec-white">
+    <div class="inner">
+      <div class="mf-tabs" id="marketFilters">
+        <div class="bfilt on" style="border-radius:100px;" onclick="marketFilter('All',this)">All</div>
+        <div class="bfilt" style="border-radius:100px;" onclick="marketFilter('Indian',this)">🇮🇳 Indian</div>
+        <div class="bfilt" style="border-radius:100px;" onclick="marketFilter('US',this)">🇺🇸 US Stocks</div>
+        <div class="bfilt" style="border-radius:100px;" onclick="marketFilter('ETF',this)">📊 ETFs</div>
+      </div>
+      <div class="market-grid" id="marketGrid"></div>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="inner">
+      <h2 class="cta-band-h">Ready to own a piece<br>of both worlds?</h2>
+      <p class="cta-band-sub">Sign up to invest in Indian and US markets from a single Aspora account.</p>
+      <button class="btn-lg btn-lg-blue" onclick="nav('products')">Start investing →</button>
+    </div>
+  </div>
+
+  <footer><div class="footer-mini"><div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div><div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd. Capital at risk.</div></div></footer>
+</div><!-- /page-markets -->
 
 
 <!-- ════════════════════════════════════════
@@ -1547,25 +1619,25 @@
           <div class="supp-icon">💬</div>
           <div class="supp-title">Live Chat</div>
           <div class="supp-desc">Chat with our team in real time. Average response under 2 minutes. Available 8am–10pm every day.</div>
-          <button class="btn-cta-sm">Start a chat</button>
+          <button class="btn-cta-sm" onclick="window.open('https://wa.me/+442080001234','_blank')">Start a chat</button>
         </div>
         <div class="supp-card">
           <div class="supp-icon">📱</div>
           <div class="supp-title">WhatsApp</div>
           <div class="supp-desc">Message us where you already are. We respond within the hour in English, Hindi, Tamil, and Gujarati.</div>
-          <button class="btn-cta-sm" style="background:var(--teal);">Open WhatsApp</button>
+          <button class="btn-cta-sm" style="background:var(--teal);" onclick="window.open('https://wa.me/+442080001234','_blank')">Open WhatsApp</button>
         </div>
         <div class="supp-card">
           <div class="supp-icon">📧</div>
           <div class="supp-title">Email</div>
           <div class="supp-desc">For complex queries or document submissions. We respond within 4 business hours, guaranteed.</div>
-          <button class="btn-cta-sm" style="background:var(--g800);">Send an email</button>
+          <button class="btn-cta-sm" style="background:var(--g800);" onclick="window.location.href='mailto:support@aspora.com'">Send an email</button>
         </div>
         <div class="supp-card">
           <div class="supp-icon">📚</div>
           <div class="supp-title">Help Centre</div>
           <div class="supp-desc">700+ articles covering everything from KYC to remittance limits. Plain English. Actually searchable.</div>
-          <button class="btn-cta-sm" style="background:var(--blue);">Browse articles</button>
+          <button class="btn-cta-sm" style="background:var(--blue);" onclick="nav('learn')">Browse articles</button>
         </div>
       </div>
 
@@ -1607,7 +1679,7 @@
 
   <footer>
     <div class="footer-mini">
-      <div class="footer-logo">Asp<em>o</em>ra</div>
+      <div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div>
       <div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd.</div>
     </div>
   </footer>
@@ -1812,7 +1884,7 @@
 
   <footer>
     <div class="footer-mini">
-      <div class="footer-logo">Asp<em>o</em>ra</div>
+      <div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div>
       <div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd.</div>
     </div>
   </footer>
@@ -1844,7 +1916,7 @@
   <section class="section sec-white" style="padding-top:52px; padding-bottom:52px;">
     <div class="inner">
       <div class="chart-period-tabs">
-        <div class="cpt on">1W</div><div class="cpt">1M</div><div class="cpt">3M</div><div class="cpt">1Y</div><div class="cpt">3Y</div><div class="cpt">All</div>
+        <div class="cpt on" onclick="setCpt(this)">1W</div><div class="cpt" onclick="setCpt(this)">1M</div><div class="cpt" onclick="setCpt(this)">3M</div><div class="cpt" onclick="setCpt(this)">1Y</div><div class="cpt" onclick="setCpt(this)">3Y</div><div class="cpt" onclick="setCpt(this)">All</div>
       </div>
       <div class="chart-area">
         <div class="chart-line-mock">
@@ -1890,16 +1962,16 @@
   <!-- CTA -->
   <section class="section sec-white" style="padding-top:64px;padding-bottom:64px;text-align:center;">
     <div class="inner">
-      <h2 class="sec-h2" style="margin-bottom:12px;">Ready to invest in RELIANCE?</h2>
-      <p style="color:var(--g500);margin-bottom:32px;">Sign up to access live prices, place trades, and build your NRI portfolio.</p>
+      <h2 class="sec-h2" id="asset-cta-h" style="margin-bottom:12px;">Ready to invest?</h2>
+      <p style="color:var(--g500);margin-bottom:32px;">Sign up to access live prices, place trades, and build your portfolio.</p>
       <div class="cta-row" style="justify-content:center;">
-        <button class="btn-lg btn-lg-blue">Start investing →</button>
-        <button class="btn-lg btn-lg-ghost" onclick="nav('option-chain')">View option chain</button>
+        <button class="btn-lg btn-lg-blue" onclick="nav('products')">Start investing →</button>
+        <button class="btn-lg btn-lg-ghost" onclick="nav('markets')">← Back to markets</button>
       </div>
     </div>
   </section>
 
-  <footer><div class="footer-mini"><div class="footer-logo">Asp<em>o</em>ra</div><div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd.</div></div></footer>
+  <footer><div class="footer-mini"><div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div><div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd.</div></div></footer>
 </div><!-- /page-asset -->
 
 <!-- PAGE: OPTION CHAIN -->
@@ -1922,10 +1994,10 @@
         <div>
           <span class="ochain-label">Expiry</span>
           <div class="ochain-expiry-tabs">
-            <div class="oet on">24 Apr</div>
-            <div class="oet">01 May</div>
-            <div class="oet">29 May</div>
-            <div class="oet">26 Jun</div>
+            <div class="oet on" onclick="setOet(this)">24 Apr</div>
+            <div class="oet" onclick="setOet(this)">01 May</div>
+            <div class="oet" onclick="setOet(this)">29 May</div>
+            <div class="oet" onclick="setOet(this)">26 Jun</div>
           </div>
         </div>
         <div class="asset-snapshot-note">⚠ Static snapshot — log in for live data</div>
@@ -1964,11 +2036,11 @@
     <div class="inner">
       <h2 class="sec-h2" style="margin-bottom:12px;">Trade RELIANCE options</h2>
       <p style="color:var(--g500);margin-bottom:32px;">Sign up to access live option chain data and execute trades.</p>
-      <button class="btn-lg btn-lg-blue">Sign up to trade →</button>
+      <button class="btn-lg btn-lg-blue" onclick="nav('products')">Sign up to trade →</button>
     </div>
   </section>
 
-  <footer><div class="footer-mini"><div class="footer-logo">Asp<em>o</em>ra</div><div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd.</div></div></footer>
+  <footer><div class="footer-mini"><div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div><div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd.</div></div></footer>
 </div><!-- /page-option-chain -->
 
 <!-- PAGE: TRANSACTION DETAIL -->
@@ -2057,7 +2129,7 @@
             <div class="txn-detail-row" style="border-top:1px solid var(--g200);margin-top:8px;padding-top:8px;"><span>Recipient gets</span><span><strong style="color:var(--crimson)">₹54,074.58</strong></span></div>
           </div>
           <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px;">
-            <button class="btn-lg btn-lg-primary" style="font-size:14px;padding:12px 20px;">Send again →</button>
+            <button class="btn-lg btn-lg-primary" style="font-size:14px;padding:12px 20px;" onclick="nav('remittance')">Send again →</button>
             <button class="btn-lg btn-lg-ghost" style="font-size:14px;padding:12px 20px;">Download receipt</button>
           </div>
         </div>
@@ -2066,7 +2138,7 @@
     </div>
   </section>
 
-  <footer><div class="footer-mini"><div class="footer-logo">Asp<em>o</em>ra</div><div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd. FCA Regulated.</div></div></footer>
+  <footer><div class="footer-mini"><div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div><div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd. FCA Regulated.</div></div></footer>
 </div><!-- /page-transaction -->
 
 <!-- PAGE: BANK ACCOUNT DETAILS -->
@@ -2129,8 +2201,8 @@
           <div class="acct-card-stat"><div class="acct-card-stat-label">ATM limit</div><div class="acct-card-stat-val">£500 / day</div></div>
           <div class="acct-card-stat"><div class="acct-card-stat-label">Spend limit</div><div class="acct-card-stat-val">£5,000 / day</div></div>
           <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn-lg btn-lg-teal" style="font-size:13px;padding:10px 18px;">Freeze card</button>
-            <button class="btn-lg btn-lg-ghost" style="font-size:13px;padding:10px 18px;">View PIN</button>
+            <button class="btn-lg btn-lg-teal" style="font-size:13px;padding:10px 18px;" onclick="alert('Card freeze is available after login.')">Freeze card</button>
+            <button class="btn-lg btn-lg-ghost" style="font-size:13px;padding:10px 18px;" onclick="alert('PIN is available after login.')">View PIN</button>
           </div>
         </div>
       </div>
@@ -2150,11 +2222,11 @@
         <div class="mini-txn"><div class="mini-txn-icon" style="background:rgba(9,126,141,0.08);">☕</div><div class="mini-txn-detail"><div class="mini-txn-name">Pret A Manger</div><div class="mini-txn-date">10 Apr 2026</div></div><div class="mini-txn-amt dn">- £5.20</div></div>
         <div class="mini-txn"><div class="mini-txn-icon" style="background:rgba(200,134,10,0.08);">📈</div><div class="mini-txn-detail"><div class="mini-txn-name">Investment — RELIANCE purchase</div><div class="mini-txn-date">08 Apr 2026</div></div><div class="mini-txn-amt dn">- £200.00</div></div>
       </div>
-      <button class="btn-lg btn-lg-ghost" style="margin-top:24px;font-size:13px;">View all transactions</button>
+      <button class="btn-lg btn-lg-ghost" style="margin-top:24px;font-size:13px;" onclick="nav('transaction')">View all transactions</button>
     </div>
   </section>
 
-  <footer><div class="footer-mini"><div class="footer-logo">Asp<em>o</em>ra</div><div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd. FCA Regulated.</div></div></footer>
+  <footer><div class="footer-mini"><div class="footer-logo-wrap"><svg class="footer-logo-mark" viewBox="0 0 52 34" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M0 34 L0 0 L28 0 L18 34 Z"/><path d="M32 0 L52 0 L52 34 L40 34 Z"/></svg><span class="footer-logo-text">aspora</span></div><div style="font-size:12px;color:rgba(255,255,255,0.3);">© 2026 Aspora Financial Ltd. FCA Regulated.</div></div></footer>
 </div><!-- /page-bank-account -->
 
 
@@ -2235,14 +2307,109 @@
 
   function cycleCountry() { /* country selector removed */ }
 
+  /* ── ASSETS DATA ── */
+  const ASSETS = {
+    RELIANCE: { ticker:'RELIANCE', exchange:'NSE', name:'Reliance Industries Ltd.', price:'₹2,847.60', change:'+1.24%', up:true, market:'Indian', sector:'Conglomerate', cap:'₹19.2L Cr', pe:'28.4x', hi52:'₹3,217', lo52:'₹2,184', divYield:'0.38%', vol:'6.2M', eps:'₹100.2', desc:'Reliance Industries is India\'s largest private-sector company by revenue, spanning petrochemicals, retail (Reliance Retail), and telecommunications (Jio). Listed on NSE/BSE and a Nifty 50 constituent. For NRI investors, Reliance offers broad exposure to India\'s growth economy.' },
+    TCS:      { ticker:'TCS', exchange:'NSE', name:'Tata Consultancy Services', price:'₹3,612.40', change:'+0.86%', up:true, market:'Indian', sector:'Technology', cap:'₹13.1L Cr', pe:'24.8x', hi52:'₹4,254', lo52:'₹3,056', divYield:'1.42%', vol:'2.8M', eps:'₹145.6', desc:'Tata Consultancy Services is India\'s largest IT services company and a global leader in technology consulting. A Nifty 50 constituent and a preferred holding for NRIs seeking India tech exposure.' },
+    INFY:     { ticker:'INFY', exchange:'NSE', name:'Infosys Ltd.', price:'₹1,524.15', change:'-0.42%', up:false, market:'Indian', sector:'Technology', cap:'₹6.3L Cr', pe:'21.6x', hi52:'₹1,994', lo52:'₹1,358', divYield:'2.18%', vol:'4.1M', eps:'₹70.5', desc:'Infosys is one of India\'s most recognised IT services firms, listed on NSE, BSE, and NYSE (ADR). Strong dividend history and consistent global IT revenue growth.' },
+    HDFCBANK: { ticker:'HDFCBANK', exchange:'NSE', name:'HDFC Bank Ltd.', price:'₹1,697.80', change:'+0.64%', up:true, market:'Indian', sector:'Banking', cap:'₹12.9L Cr', pe:'18.2x', hi52:'₹1,880', lo52:'₹1,412', divYield:'1.12%', vol:'5.6M', eps:'₹93.4', desc:'HDFC Bank is India\'s largest private sector bank, known for consistent growth and strong asset quality. Widely held by NRI investors for exposure to India\'s financial sector.' },
+    AAPL:     { ticker:'AAPL', exchange:'NASDAQ', name:'Apple Inc.', price:'$189.30', change:'+0.72%', up:true, market:'US', sector:'Technology', cap:'$2.93T', pe:'31.2x', hi52:'$198.23', lo52:'$164.08', divYield:'0.52%', vol:'54.2M', eps:'$6.08', desc:'Apple Inc. designs and sells consumer electronics, software, and services worldwide. The world\'s most valuable company by market cap and a core holding in most global portfolios.' },
+    MSFT:     { ticker:'MSFT', exchange:'NASDAQ', name:'Microsoft Corporation', price:'$415.20', change:'+1.08%', up:true, market:'US', sector:'Technology', cap:'$3.09T', pe:'35.4x', hi52:'$430.82', lo52:'$309.45', divYield:'0.72%', vol:'22.8M', eps:'$11.74', desc:'Microsoft develops cloud solutions (Azure), enterprise software, and AI tools. Azure cloud growth and Copilot AI integration make it central to the modern enterprise stack.' },
+    GOOGL:    { ticker:'GOOGL', exchange:'NASDAQ', name:'Alphabet Inc.', price:'$172.45', change:'-0.31%', up:false, market:'US', sector:'Technology', cap:'$2.16T', pe:'22.8x', hi52:'$191.75', lo52:'$130.67', divYield:'0.48%', vol:'18.4M', eps:'$7.56', desc:'Alphabet is the parent of Google, YouTube, and Google Cloud. Advertising dominance, cloud growth, and AI (Gemini) position it as a critical component of any global equity portfolio.' },
+    AMZN:     { ticker:'AMZN', exchange:'NASDAQ', name:'Amazon.com Inc.', price:'$185.60', change:'+1.34%', up:true, market:'US', sector:'E-Commerce & Cloud', cap:'$1.96T', pe:'41.2x', hi52:'$201.20', lo52:'$141.50', divYield:'0%', vol:'36.8M', eps:'$4.50', desc:'Amazon leads global e-commerce and cloud infrastructure (AWS). AWS contributes the majority of Amazon\'s profits and is a core enabler of the global digital economy.' },
+    SPY:      { ticker:'SPY', exchange:'NYSE', name:'SPDR S&P 500 ETF Trust', price:'$513.40', change:'+0.54%', up:true, market:'ETF', sector:'Broad Market', cap:'$536B AUM', pe:'22.1x', hi52:'$524.61', lo52:'$428.26', divYield:'1.28%', vol:'68.4M', eps:'—', desc:'SPY tracks the S&P 500, offering diversified exposure to 500 large US companies. The world\'s most traded ETF and a cornerstone holding for long-term investors seeking US equity exposure.' },
+    QQQ:      { ticker:'QQQ', exchange:'NASDAQ', name:'Invesco QQQ Trust', price:'$441.80', change:'+0.88%', up:true, market:'ETF', sector:'Technology', cap:'$231B AUM', pe:'31.8x', hi52:'$461.05', lo52:'$342.20', divYield:'0.56%', vol:'42.6M', eps:'—', desc:'QQQ tracks the NASDAQ-100, the 100 largest non-financial NASDAQ companies. Heavy tech weighting makes it ideal for growth-focused investors seeking concentrated US tech exposure.' },
+    VTI:      { ticker:'VTI', exchange:'NYSE', name:'Vanguard Total Stock Market ETF', price:'$247.60', change:'+0.41%', up:true, market:'ETF', sector:'Total Market', cap:'$411B AUM', pe:'21.4x', hi52:'$258.30', lo52:'$201.84', divYield:'1.42%', vol:'3.8M', eps:'—', desc:'VTI covers the entire US equity market from mega-cap to small-cap. With an expense ratio of just 0.03%, it is one of the most cost-efficient ways to own the US stock market.' },
+    IEMG:     { ticker:'IEMG', exchange:'NYSE', name:'iShares Core MSCI Emerging Markets ETF', price:'$48.72', change:'-0.18%', up:false, market:'ETF', sector:'Emerging Markets', cap:'$74B AUM', pe:'12.4x', hi52:'$52.10', lo52:'$39.84', divYield:'2.86%', vol:'14.2M', eps:'—', desc:'IEMG tracks large, mid, and small-cap emerging market equities across 24 countries, including India. A cost-efficient way to gain broad EM exposure alongside direct Indian equity holdings.' },
+  };
+
   /* ── ROUTER ── */
   function nav(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const el = document.getElementById('page-' + page);
     if (el) el.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (page === 'home')     renderGrid('home-pgrid', currentCountry);
+    if (page === 'home')    renderGrid('home-pgrid', currentCountry);
     if (page === 'products') renderGrid('prod-pgrid', currentCountry);
+    if (page === 'markets') renderMarkets('All');
+  }
+
+  /* ── MARKETS GRID ── */
+  function renderMarkets(filter) {
+    const grid = document.getElementById('marketGrid');
+    if (!grid) return;
+    const keys = Object.keys(ASSETS).filter(k => filter === 'All' || ASSETS[k].market === filter);
+    grid.innerHTML = keys.map(k => {
+      const a = ASSETS[k];
+      const arrow = a.up ? '▲' : '▼';
+      return `<div class="mcard" onclick="navAsset('${k}')">
+        <div class="mcard-top">
+          <span class="mcard-ticker">${a.ticker}</span>
+          <span class="mcard-exchange">${a.exchange}</span>
+        </div>
+        <div class="mcard-name">${a.name}</div>
+        <div class="mcard-price">${a.price}</div>
+        <div class="mcard-change ${a.up ? 'up' : 'dn'}">${arrow} ${a.change}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function marketFilter(cat, el) {
+    document.querySelectorAll('#marketFilters .bfilt').forEach(b => b.classList.remove('on'));
+    el.classList.add('on');
+    renderMarkets(cat);
+  }
+
+  /* ── DYNAMIC ASSET DETAIL ── */
+  function navAsset(ticker) {
+    const a = ASSETS[ticker] || ASSETS['RELIANCE'];
+    const arrow = a.up ? '▲' : '▼';
+    // breadcrumb
+    document.querySelector('#page-asset .breadcrumb').innerHTML =
+      `<span onclick="nav('investments')">Investments</span><span class="breadcrumb-sep">/</span><span onclick="nav('markets')">Markets</span><span class="breadcrumb-sep">/</span><span>${a.ticker}</span>`;
+    // header
+    document.querySelector('.asset-ticker').textContent = a.ticker;
+    document.querySelector('.asset-exchange').textContent = a.exchange;
+    document.querySelector('.asset-name').textContent = a.name;
+    document.querySelector('.asset-price').textContent = a.price;
+    const chEl = document.querySelector('.asset-change');
+    chEl.textContent = `${arrow} ${a.change} today`;
+    chEl.className = 'asset-change ' + (a.up ? 'up' : 'dn');
+    // stats
+    const statData = [
+      ['Market cap', a.cap], ['P/E ratio', a.pe], ['52W High', a.hi52], ['52W Low', a.lo52],
+      ['Dividend yield', a.divYield], ['Volume (avg)', a.vol], ['EPS (TTM)', a.eps], ['Sector', a.sector]
+    ];
+    document.querySelectorAll('.stat-box').forEach((box, i) => {
+      if (statData[i]) {
+        box.querySelector('.stat-label').textContent = statData[i][0];
+        box.querySelector('.stat-val').textContent = statData[i][1];
+      }
+    });
+    // about
+    const aboutH = document.querySelector('#page-asset .sec-h2');
+    if (aboutH) aboutH.textContent = a.name;
+    const aboutP = document.querySelector('#page-asset .sec-gray p');
+    if (aboutP) aboutP.textContent = a.desc;
+    // cta
+    const ctaH = document.getElementById('asset-cta-h');
+    if (ctaH) ctaH.textContent = `Ready to invest in ${a.ticker}?`;
+    // option chain link — show only for Indian equities
+    const ocBtn = document.querySelector('#page-asset .btn-lg-ghost[onclick*="markets"]');
+    if (ocBtn) ocBtn.textContent = '← Back to markets';
+    nav('asset');
+  }
+
+  /* ── CHART PERIOD TABS ── */
+  function setCpt(el) {
+    el.closest('.chart-period-tabs').querySelectorAll('.cpt').forEach(t => t.classList.remove('on'));
+    el.classList.add('on');
+  }
+
+  /* ── OPTION CHAIN EXPIRY TABS ── */
+  function setOet(el) {
+    el.closest('.ochain-expiry-tabs').querySelectorAll('.oet').forEach(t => t.classList.remove('on'));
+    el.classList.add('on');
   }
 
   /* ── FAQ ACCORDION ── */
@@ -2298,19 +2465,35 @@
   /* ── INIT ── */
   renderGrid('home-pgrid', 'IN');
   renderGrid('prod-pgrid', 'IN');
+  renderMarkets('All');
 
   /* ── NAV SEARCH ── */
   const SEARCH_INDEX = [
-    { icon:'💸', title:'Remittance',   tag:'Send money home · Fast transfers',        page:'remittance'  },
-    { icon:'🏦', title:'Banking',      tag:'Multi-currency bank account',              page:'banking'     },
-    { icon:'📈', title:'Investments',  tag:'Indian markets, ETFs, mutual funds',       page:'investments' },
-    { icon:'🗂️', title:'All Products', tag:'Browse every Aspora product',             page:'products'    },
-    { icon:'🎓', title:'Learn',        tag:'Guides, tips & financial education',       page:'learn'       },
-    { icon:'🙋', title:'Support',      tag:'Help centre & contact',                    page:'support'     },
-    { icon:'💳', title:'Transactions', tag:'View a transaction detail',                page:'transaction' },
-    { icon:'🏛️', title:'Bank Account', tag:'Your account overview & balances',        page:'bank-account'},
-    { icon:'📊', title:'Asset Detail', tag:'Equity & ETF performance charts',          page:'asset'       },
-    { icon:'🔗', title:'Option Chain', tag:'Options trading table',                    page:'option-chain'},
+    { icon:'💸', title:'Remittance',          tag:'Send money home · Fast transfers',           page:'remittance',   action: null },
+    { icon:'🏦', title:'Banking',             tag:'Multi-currency bank account',                page:'banking',      action: null },
+    { icon:'📈', title:'Investments',         tag:'Indian markets, ETFs, mutual funds',         page:'investments',  action: null },
+    { icon:'🌐', title:'Browse Markets',      tag:'Stocks & ETFs · Indian & US',               page:'markets',      action: null },
+    { icon:'🗂️', title:'All Products',       tag:'Browse every Aspora product',               page:'products',     action: null },
+    { icon:'🎓', title:'Learn',               tag:'Guides, tips & financial education',         page:'learn',        action: null },
+    { icon:'🙋', title:'Support',             tag:'Help centre & contact',                      page:'support',      action: null },
+    { icon:'💳', title:'Transactions',        tag:'View a transaction detail',                  page:'transaction',  action: null },
+    { icon:'🏛️', title:'Bank Account',       tag:'Your account overview & balances',          page:'bank-account', action: null },
+    { icon:'🔗', title:'Option Chain',        tag:'Options trading table · RELIANCE',           page:'option-chain', action: null },
+    // Indian equities
+    { icon:'🇮🇳', title:'RELIANCE',          tag:'Reliance Industries · NSE · ₹2,847.60',     page:'asset', action:'RELIANCE' },
+    { icon:'🇮🇳', title:'TCS',               tag:'Tata Consultancy Services · NSE · ₹3,612', page:'asset', action:'TCS' },
+    { icon:'🇮🇳', title:'INFY',              tag:'Infosys Ltd. · NSE · ₹1,524.15',            page:'asset', action:'INFY' },
+    { icon:'🇮🇳', title:'HDFCBANK',          tag:'HDFC Bank · NSE · ₹1,697.80',              page:'asset', action:'HDFCBANK' },
+    // US stocks
+    { icon:'🇺🇸', title:'AAPL',              tag:'Apple Inc. · NASDAQ · $189.30',             page:'asset', action:'AAPL' },
+    { icon:'🇺🇸', title:'MSFT',              tag:'Microsoft · NASDAQ · $415.20',             page:'asset', action:'MSFT' },
+    { icon:'🇺🇸', title:'GOOGL',             tag:'Alphabet · NASDAQ · $172.45',              page:'asset', action:'GOOGL' },
+    { icon:'🇺🇸', title:'AMZN',              tag:'Amazon · NASDAQ · $185.60',                page:'asset', action:'AMZN' },
+    // ETFs
+    { icon:'📊', title:'SPY',                tag:'S&P 500 ETF · NYSE · $513.40',              page:'asset', action:'SPY' },
+    { icon:'📊', title:'QQQ',                tag:'NASDAQ-100 ETF · $441.80',                  page:'asset', action:'QQQ' },
+    { icon:'📊', title:'VTI',                tag:'Vanguard Total Market ETF · $247.60',       page:'asset', action:'VTI' },
+    { icon:'📊', title:'IEMG',               tag:'Emerging Markets ETF · $48.72',             page:'asset', action:'IEMG' },
   ];
 
   function navSearchToggle() {
@@ -2346,7 +2529,7 @@
       dd.innerHTML = '<div class="nsr-empty">No results for "<strong>' + val + '</strong>"</div>';
     } else {
       dd.innerHTML = hits.map(h => `
-        <div class="nsr-item" onclick="navSearchPick('${h.page}')">
+        <div class="nsr-item" onclick="navSearchPick('${h.page}','${h.action||''}')">
           <div class="nsr-icon">${h.icon}</div>
           <div class="nsr-text">
             <div class="nsr-title">${h.title}</div>
@@ -2357,9 +2540,9 @@
     dd.classList.add('has-results');
   }
 
-  function navSearchPick(page) {
+  function navSearchPick(page, action) {
     navSearchClose();
-    nav(page);
+    if (action) { navAsset(action); } else { nav(page); }
   }
 
   // close on outside click
