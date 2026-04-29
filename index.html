@@ -77,6 +77,55 @@
     }
     .btn-cta-sm:hover { background: #0a8f9f; transform: translateY(-1px); }
 
+    /* ─── NAV SEARCH ─── */
+    .nav-search { position: relative; display: flex; align-items: center; }
+    .nav-search-icon {
+      width: 34px; height: 34px; border-radius: 8px; border: none;
+      background: transparent; color: var(--g500); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, color 0.15s; flex-shrink: 0;
+    }
+    .nav-search-icon:hover, .nav-search.open .nav-search-icon {
+      background: var(--g100); color: var(--g800);
+    }
+    .nav-search-icon svg { width: 17px; height: 17px; }
+    .nav-search-box {
+      display: flex; align-items: center; gap: 6px;
+      overflow: hidden; width: 0; opacity: 0;
+      transition: width 0.25s cubic-bezier(.4,0,.2,1), opacity 0.2s;
+    }
+    .nav-search.open .nav-search-box { width: 220px; opacity: 1; }
+    .nav-search-input {
+      width: 100%; border: 1.5px solid var(--g200); border-radius: 8px;
+      padding: 6px 12px; font-size: 13px; color: var(--g800); background: var(--white);
+      outline: none; transition: border-color 0.15s;
+    }
+    .nav-search-input:focus { border-color: var(--teal); }
+    .nav-search-input::placeholder { color: var(--g400); }
+    .nav-search-dropdown {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      width: 300px; background: var(--white);
+      border: 1.5px solid var(--g200); border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+      overflow: hidden; display: none; z-index: 300;
+    }
+    .nav-search.open .nav-search-dropdown.has-results { display: block; }
+    .nsr-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px; cursor: pointer; transition: background 0.12s;
+    }
+    .nsr-item:not(:last-child) { border-bottom: 1px solid var(--g100); }
+    .nsr-item:hover { background: var(--g100); }
+    .nsr-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--g100); display: flex; align-items: center;
+      justify-content: center; font-size: 15px; flex-shrink: 0;
+    }
+    .nsr-text { flex: 1; min-width: 0; }
+    .nsr-title { font-size: 13px; font-weight: 600; color: var(--g800); }
+    .nsr-tag { font-size: 11px; color: var(--g500); margin-top: 1px; }
+    .nsr-empty { padding: 16px 14px; font-size: 13px; color: var(--g400); text-align: center; }
+
     /* ─── HERO (Home) ─── */
     .hero {
       min-height: 88vh; background: var(--white);
@@ -543,6 +592,8 @@
     @media (max-width: 960px) {
       .nav-inner { padding: 0 24px; }
       .nav-links { display: none; }
+      .nav-search.open .nav-search-box { width: 160px; }
+      .nav-search-dropdown { width: 260px; }
       .hero, .phero { padding-left: 24px; padding-right: 24px; }
       .section, .cta-band { padding-left: 24px; padding-right: 24px; }
       .manifesto-band { padding: 64px 24px; }
@@ -761,6 +812,21 @@
       </div>
     </div>
     <div class="nav-actions">
+      <!-- search -->
+      <div class="nav-search" id="navSearch">
+        <button class="nav-search-icon" onclick="navSearchToggle()" aria-label="Search">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="9" r="5.5"/><line x1="13.5" y1="13.5" x2="17" y2="17"/>
+          </svg>
+        </button>
+        <div class="nav-search-box">
+          <input class="nav-search-input" id="navSearchInput" type="text"
+            placeholder="Search…"
+            oninput="navSearchQuery(this.value)"
+            onkeydown="if(event.key==='Escape')navSearchClose()" />
+        </div>
+        <div class="nav-search-dropdown" id="navSearchDropdown"></div>
+      </div>
       <button class="btn-ghost-sm">Log in</button>
       <button class="btn-cta-sm" onclick="nav('products')">Sign up free</button>
     </div>
@@ -2232,6 +2298,75 @@
   /* ── INIT ── */
   renderGrid('home-pgrid', 'IN');
   renderGrid('prod-pgrid', 'IN');
+
+  /* ── NAV SEARCH ── */
+  const SEARCH_INDEX = [
+    { icon:'💸', title:'Remittance',   tag:'Send money home · Fast transfers',        page:'remittance'  },
+    { icon:'🏦', title:'Banking',      tag:'Multi-currency bank account',              page:'banking'     },
+    { icon:'📈', title:'Investments',  tag:'Indian markets, ETFs, mutual funds',       page:'investments' },
+    { icon:'🗂️', title:'All Products', tag:'Browse every Aspora product',             page:'products'    },
+    { icon:'🎓', title:'Learn',        tag:'Guides, tips & financial education',       page:'learn'       },
+    { icon:'🙋', title:'Support',      tag:'Help centre & contact',                    page:'support'     },
+    { icon:'💳', title:'Transactions', tag:'View a transaction detail',                page:'transaction' },
+    { icon:'🏛️', title:'Bank Account', tag:'Your account overview & balances',        page:'bank-account'},
+    { icon:'📊', title:'Asset Detail', tag:'Equity & ETF performance charts',          page:'asset'       },
+    { icon:'🔗', title:'Option Chain', tag:'Options trading table',                    page:'option-chain'},
+  ];
+
+  function navSearchToggle() {
+    const wrap = document.getElementById('navSearch');
+    const input = document.getElementById('navSearchInput');
+    if (wrap.classList.contains('open')) {
+      navSearchClose();
+    } else {
+      wrap.classList.add('open');
+      setTimeout(() => input.focus(), 50);
+    }
+  }
+
+  function navSearchClose() {
+    const wrap = document.getElementById('navSearch');
+    wrap.classList.remove('open');
+    document.getElementById('navSearchInput').value = '';
+    const dd = document.getElementById('navSearchDropdown');
+    dd.classList.remove('has-results');
+    dd.innerHTML = '';
+  }
+
+  function navSearchQuery(val) {
+    const q = val.trim().toLowerCase();
+    const dd = document.getElementById('navSearchDropdown');
+    if (!q) { dd.classList.remove('has-results'); dd.innerHTML = ''; return; }
+
+    const hits = SEARCH_INDEX.filter(item =>
+      item.title.toLowerCase().includes(q) || item.tag.toLowerCase().includes(q)
+    );
+
+    if (hits.length === 0) {
+      dd.innerHTML = '<div class="nsr-empty">No results for "<strong>' + val + '</strong>"</div>';
+    } else {
+      dd.innerHTML = hits.map(h => `
+        <div class="nsr-item" onclick="navSearchPick('${h.page}')">
+          <div class="nsr-icon">${h.icon}</div>
+          <div class="nsr-text">
+            <div class="nsr-title">${h.title}</div>
+            <div class="nsr-tag">${h.tag}</div>
+          </div>
+        </div>`).join('');
+    }
+    dd.classList.add('has-results');
+  }
+
+  function navSearchPick(page) {
+    navSearchClose();
+    nav(page);
+  }
+
+  // close on outside click
+  document.addEventListener('click', function(e) {
+    const wrap = document.getElementById('navSearch');
+    if (wrap && !wrap.contains(e.target)) navSearchClose();
+  });
 </script>
 </body>
 </html>
